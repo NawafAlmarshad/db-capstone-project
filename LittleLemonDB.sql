@@ -1,0 +1,53 @@
+CREATE DATABASE LittleLemonDB;
+USE LittleLemonDB;
+
+CREATE TABLE Customers (
+    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100),
+    Phone VARCHAR(15)
+);
+
+CREATE TABLE Staff (
+    EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Role VARCHAR(50) NOT NULL,
+    Salary DECIMAL(10,2)
+);
+
+CREATE TABLE Bookings (
+    BookingID INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerID INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    TableNumber INT NOT NULL,
+    BookingDate DATETIME NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (EmployeeID) REFERENCES Staff(EmployeeID)
+);
+
+CREATE TABLE Menu (
+    MenuID INT AUTO_INCREMENT PRIMARY KEY,
+    ItemName VARCHAR(100) NOT NULL,
+    Category VARCHAR(50),
+    Price DECIMAL(7,2) NOT NULL
+);
+
+CREATE TABLE Orders (
+    OrderID INT AUTO_INCREMENT PRIMARY KEY,
+    BookingID INT NOT NULL,
+    MenuID INT NOT NULL,
+    Quantity INT NOT NULL,
+    TotalCost DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID),
+    FOREIGN KEY (MenuID) REFERENCES Menu(MenuID)
+);
+
+CREATE TABLE OrderDeliveryStatus (
+    DeliveryID INT AUTO_INCREMENT PRIMARY KEY,
+    OrderID INT NOT NULL,
+    DeliveryDate DATETIME,
+    Status VARCHAR(50),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
