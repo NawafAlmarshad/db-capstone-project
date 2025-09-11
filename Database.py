@@ -3,9 +3,9 @@ import mysql.connector as connector
 
 # إنشاء الاتصال بقاعدة البيانات
 connection = connector.connect(
-    user="root",       # حط اسم المستخدم حق قاعدة البيانات
-    password="1234",   # حط الباسوورد
-    db=""           # اسم قاعدة البيانات
+    user="root",       #
+    password="1234",   #
+    db=""
 )
 
 # إنشاء كائن cursor لإرسال الاستعلامات
@@ -29,3 +29,4 @@ high_value_customers = cursor.fetchall()
 print("Customers with orders > $60:")
 for customer in high_value_customers:
     print(f"Name: {customer[0]}, Contact: {customer[1]}, Total Cost: ${customer[2]}")
+
