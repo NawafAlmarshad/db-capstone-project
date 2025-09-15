@@ -53,11 +53,22 @@ cursor.execute("""
         WHERE BookingID = p_BookingID;
     END
 """)
+#4 GetMaxQuantity
+cursor.execute("DROP PROCEDURE IF EXISTS GetMaxQuantity;")
+
+cursor.execute("""
+    CREATE PROCEDURE GetMaxQuantity()
+    BEGIN
+        SELECT MAX(Quantity) AS MaxQuantity
+        FROM Orders;
+    END
+""")
 
 print("Stored procedures created successfully!")
 
 
 connection.commit()
+
 
 
 
